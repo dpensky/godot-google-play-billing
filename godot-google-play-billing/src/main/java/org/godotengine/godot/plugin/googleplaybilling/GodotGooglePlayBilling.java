@@ -49,8 +49,6 @@ import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
 import com.android.billingclient.api.ConsumeParams;
 import com.android.billingclient.api.ConsumeResponseListener;
-import com.android.billingclient.api.PriceChangeConfirmationListener;
-import com.android.billingclient.api.PriceChangeFlowParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
@@ -68,7 +66,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpdatedListener, BillingClientStateListener, PriceChangeConfirmationListener {
+public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpdatedListener, BillingClientStateListener {
 
 	private final BillingClient billingClient;
 	private final HashMap<String, ProductDetails> productDetailsCache = new HashMap<>(); // sku → SkuDetails
@@ -297,11 +295,6 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 	}
 
 	@Override
-	public void onPriceChangeConfirmationResult(BillingResult billingResult) {
-		emitSignal("price_change_acknowledged", billingResult.getResponseCode());
-	}
-
-	@Override
 	public void onMainResume() {
 		if (calledStartConnection) {
 			emitSignal("billing_resume");
@@ -328,7 +321,6 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 		signals.add(new SignalInfo("purchase_error", Integer.class, String.class));
 		signals.add(new SignalInfo("product_details_query_completed", Object[].class));
 		signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String[].class));
-		signals.add(new SignalInfo("price_change_acknowledged", Integer.class));
 		signals.add(new SignalInfo("purchase_acknowledged", String.class));
 		signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String.class));
 		signals.add(new SignalInfo("purchase_consumed", String.class));
