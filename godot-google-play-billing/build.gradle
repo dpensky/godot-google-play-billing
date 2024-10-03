@@ -9,11 +9,16 @@ android {
     namespace "org.godotengine.godot.plugin.googleplaybilling"
     compileSdkVersion 34
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 34
         versionCode pluginVersionCode
         versionName pluginVersionName
+        buildConfigField "String", "BILLING_VERSION", "\"6.2.1\""
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_9
