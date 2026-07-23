@@ -1,0 +1,5 @@
+- `[x]` Refactor `GooglePlayBillingUtils.java` to support `ProductDetails`
+- `[x]` Refactor `GodotGooglePlayBilling.java` to use `ProductDetails` for queries
+- `[x]` Refactor `GodotGooglePlayBilling.java` to use `ProductDetails` for purchases
+- `[x]` Verify build with `./gradlew :godot-google-play-billing:assembleDebug`
+- `[/]` Create walkthrough
