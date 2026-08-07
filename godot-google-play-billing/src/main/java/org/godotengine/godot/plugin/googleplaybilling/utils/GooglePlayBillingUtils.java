@@ -61,6 +61,7 @@ public class GooglePlayBillingUtils {
 
 	public static Dictionary convertProductDetailsToDictionary(ProductDetails details) {
 		Dictionary dictionary = new Dictionary();
+		dictionary.put("id", details.getProductId());
 		dictionary.put("product_id", details.getProductId());
 		dictionary.put("sku", details.getProductId()); // Maintain compatibility with older plugin versions
 		dictionary.put("title", details.getTitle());
@@ -69,6 +70,14 @@ public class GooglePlayBillingUtils {
 
 		if (details.getOneTimePurchaseOfferDetails() != null) {
 			ProductDetails.OneTimePurchaseOfferDetails offer = details.getOneTimePurchaseOfferDetails();
+
+			Dictionary otpd = new Dictionary();
+			otpd.put("formatted_price", offer.getFormattedPrice());
+			otpd.put("price_currency_code", offer.getPriceCurrencyCode());
+			otpd.put("price_amount_micros", offer.getPriceAmountMicros());
+			dictionary.put("one_time_purchase_details", otpd);
+
+			// Compatibility for flat structure
 			dictionary.put("price", offer.getFormattedPrice());
 			dictionary.put("price_currency_code", offer.getPriceCurrencyCode());
 			dictionary.put("price_amount_micros", offer.getPriceAmountMicros());

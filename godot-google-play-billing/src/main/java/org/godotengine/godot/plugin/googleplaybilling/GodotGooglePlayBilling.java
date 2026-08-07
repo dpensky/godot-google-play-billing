@@ -140,9 +140,9 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
                 for (ProductDetails productDetails : productDetailsList) {
                     productDetailsCache.put(productDetails.getProductId(), productDetails);
                 }
-                emitSignal("sku_details_query_completed", (Object)GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(productDetailsList));
+                emitSignal("product_details_query_completed", (Object)GooglePlayBillingUtils.convertProductDetailsListToDictionaryObjectArray(productDetailsList));
             } else {
-                emitSignal("sku_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), list);
+                emitSignal("product_details_query_error", billingResult.getResponseCode(), billingResult.getDebugMessage(), list);
             }
         });
 	}
@@ -319,8 +319,8 @@ public class GodotGooglePlayBilling extends GodotPlugin implements PurchasesUpda
 		signals.add(new SignalInfo("purchases_updated", Object[].class));
 		signals.add(new SignalInfo("query_purchases_response", Object.class));
 		signals.add(new SignalInfo("purchase_error", Integer.class, String.class));
-		signals.add(new SignalInfo("sku_details_query_completed", Object[].class));
-		signals.add(new SignalInfo("sku_details_query_error", Integer.class, String.class, String[].class));
+		signals.add(new SignalInfo("product_details_query_completed", Object[].class));
+		signals.add(new SignalInfo("product_details_query_error", Integer.class, String.class, String[].class));
 		signals.add(new SignalInfo("price_change_acknowledged", Integer.class));
 		signals.add(new SignalInfo("purchase_acknowledged", String.class));
 		signals.add(new SignalInfo("purchase_acknowledgement_error", Integer.class, String.class, String.class));
